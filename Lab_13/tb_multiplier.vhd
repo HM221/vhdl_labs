@@ -30,7 +30,7 @@ architecture behavior of tb_multiplier is
         component ram
                 port ( 
                     data : in std_logic_vector(7 downto 0);
-                    addr : in natural range 0 to 3;
+                    addr : in natural range 0 to 4;
                     we   : in std_logic;
                     clk  : in std_logic;
                     q    : out std_logic_vector(7 downto 0)
@@ -39,7 +39,7 @@ architecture behavior of tb_multiplier is
 
         --inputs
         signal input : std_logic_vector(7 downto 0) := "00000000";
-        signal addr  : natural range 0 to 3 := 0;
+        signal addr  : natural range 0 to 4 := 0;
         signal we    : std_logic := '0';
         signal clk   : std_logic;
 
@@ -73,22 +73,13 @@ begin
         -- stimulus process
         stim_proc: process
         begin
-            we    <= '1';
-            input <= "00000001";
-            addr  <= 0;
-            wait for 10 ns;
-            we    <= '0';
-            input <= "00000011";
-            addr  <= 1;
-            wait for 10 ns;
-            we    <= '1';
-            input <= "00000111";
-            addr  <= 2;    
-            wait for 10 ns;        
-            we    <= '0';
-            input <= "00001111";
-            addr  <= 3;            
-        wait;
+        we   <= '1';
+        wait for 15 ns;
+        for i in 0 to 4 loop
+            addr  <= i;
+            input <= input + 1;
+            wait for clk_period;
+        end loop;
         end process;
 
 end;

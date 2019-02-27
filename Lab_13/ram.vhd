@@ -6,7 +6,7 @@ entity ram is
 	port
 	(
 		data	: in std_logic_vector(7 downto 0);
-		addr	: in natural range 0 to 3;
+		addr	: in natural range 0 to 4;
 		we		: in std_logic;
 		clk		: in std_logic;
 		q		: out std_logic_vector(7 downto 0)
@@ -24,7 +24,7 @@ architecture rtl of ram is
 	signal ram : memory_t;
 	
 	-- Register to hold the address
-	signal addr_reg : natural range 0 to 3;
+	signal addr_reg : natural range 0 to 4;
 	
 	-- Buffer to hold the data
 	signal input_buffer : std_logic_vector(7 downto 0);
