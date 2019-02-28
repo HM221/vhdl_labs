@@ -2,7 +2,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+
+
 entity pipeline is
+    --generic (L : integer);
 	port
 	(
 		clk		 : in std_logic;
@@ -18,6 +21,7 @@ end entity;
 architecture rtl of pipeline is
 
 	component multiplier
+	   --generic (N : integer);
 	   port
 	   (
 	       input1 : in integer;
@@ -36,6 +40,7 @@ architecture rtl of pipeline is
 begin
 
 	MP1 : multiplier
+	   --generic map (N => 4);
 	   port map
 	   (
 	       input1 => pipe_data_in,
@@ -44,6 +49,7 @@ begin
 	   );
 	
 	MP2 : multiplier
+	   --generic map (N => 8)
 	   port map
 	   (
 	       input1 => output_buffer1,
